@@ -22,7 +22,7 @@ export const signup = async (req, res) => {
         }
 
         if(password.length < 6){
-            res.status.json({error: "Password should be atleast length of 6"})
+            res.status(400).json({error: "Password should be atleast length of 6"})
         }
 
         const salt = await bcrypt.genSalt(12);
@@ -56,7 +56,7 @@ export const signup = async (req, res) => {
         }
 
     } catch (error) {
-        console.log("error in signup controller ", error.message);
+        console.log("error in signup controller: ", error.message);
         res.status(500).json({error: "Internal Server Error"})
     }
 }
@@ -86,7 +86,7 @@ export const login = async (req, res) => {
         })
 
     } catch (error) {
-        console.log("error in login controller ", error.message);
+        console.log("error in login controller: ", error.message);
         res.status(500).json({error: "Internal Server Error"})
     }
 }
@@ -100,7 +100,7 @@ export const logout = async (req, res) => {
             message: "logout successfully"
         })
     } catch (error) {
-        console.log("error in logout controller ", error.message);
+        console.log("error in logout controller: ", error.message);
         res.status(500).json({error: "Internal Server Error"})
     }
 }
@@ -110,7 +110,7 @@ export const getMe = async (req, res) => {
         const user = await User.findById(req.user._id).select("-password");
         res.status(200).json({user})
     } catch (error) {
-        console.log("error in getMe controller ", error.message);
+        console.log("error in getMe controller: ", error.message);
         res.status(500).json({error: "Internal Server Error"})
     }
 }
