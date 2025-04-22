@@ -7,6 +7,7 @@ import { v2 as cloudinary} from "cloudinary";
 import authRoutes from "./routes/auth.routes.js";
 import userRoutes from "./routes/user.routes.js";
 import postRoutes from "./routes/post.routes.js";
+import notifcationRoutes from "./routes/notification.routes.js";
 
 import connectMongoDB from "./db/connectDB.js";
 
@@ -25,10 +26,10 @@ app.use(express.urlencoded({extended: true}));
 app.use(cookieParser())
 app.use(morgan('tiny'))
 
-app.use("/api/auth", authRoutes)
+app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/posts", postRoutes);
-
+app.use("/api/notification", notifcationRoutes);
 
 connectMongoDB().then(() => {
         app.listen(PORT, () => {
